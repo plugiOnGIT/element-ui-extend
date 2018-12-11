@@ -1,0 +1,70 @@
+.combo-grid-wrap {
+  .el-select {
+    width: 100%;
+    .el-input__inner {
+      padding-left: 8px;
+    }
+    .el-select__input {
+      margin-left: 8px;
+    }
+    .el-select__caret.el-input__icon {
+      &:before {
+        content: "\E605";
+      }
+    }
+  }
+}
+
+// 分页
+.cg-pagination {
+  text-align: center;
+  .el-pagination.is-background .btn-next,
+  .el-pagination.is-background .btn-prev,
+  .el-pagination.is-background .el-pager li {
+    background: none;
+  }
+}
+
+// 下拉列表部分
+.el-select-dropdown.combo-grid-list.is-multiple {
+  min-width: 250px !important;
+
+  .el-select-dropdown__item .combo-grid-checkbox::before {
+    position: absolute;
+    top: 10px;
+    left: 7px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #dcdfe6;
+    content: '';
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+
+
+  .el-select-dropdown__item.selected {
+    &::after {
+      content: '' !important;
+    }
+    .combo-grid-checkbox::before {
+      background-color: #1f82fb;
+      border: 1px solid #1f82fb;
+    }
+    .combo-grid-checkbox::after {
+      position: absolute;
+      left: 8px;
+      top: 1px;
+      font-family: element-icons;
+      content: "\E611";
+      font-size: 12px;
+      font-weight: 700;
+      color: #FFFFFF;
+      transform: scale(0.8, 0.8);
+    }
+  }
+}
+
+.no-data {
+  text-align: center;
+  cursor: text !important;
+}
