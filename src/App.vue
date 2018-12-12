@@ -4,7 +4,7 @@
       <el-col :span="6">
         <combo-grid
           v-model='searchData.comboGrid1'
-          data-fun-name="comboGridQuery"
+          :data-url-func="API.comboGridQuery"
           id="value"
           size="small"
           :multiple="true"
@@ -14,6 +14,7 @@
       <el-col :span="6">
         <combo-grid
           v-model='searchData.comboGrid2'
+          :show-field="comboGrid2ShowField"
           :data-url="API.comboGridUrl()"
           id="value"
           size="small"
@@ -24,7 +25,7 @@
       <el-col :span="6">
         <combo-grid
           v-model='searchData.comboGrid3'
-          data-fun-name="comboGridQuery"
+          :data-url-func="API.comboGridQuery"
           id="value"
           size="small"
           :multiple="false"
@@ -57,9 +58,10 @@
     name: 'app',
     data() {
       return {
+        comboGrid2ShowField: ['combo-grid测试数据1', 'combo-grid测试数据2'],
         searchData: {
           comboGrid1: [],
-          comboGrid2: [],
+          comboGrid2: [1, 2],
           comboGrid3: ''
         },
         // 表格实际查询参数
@@ -72,6 +74,7 @@
       },
       reset() {
         this.searchParam = {};
+        this.comboGrid2ShowField = [];
       }
     }
   }

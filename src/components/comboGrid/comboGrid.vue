@@ -49,26 +49,6 @@
   export default {
     name: "combo-grid",
     mixins: [Emitter],
-    data() {
-      return {
-        val: '',
-        listData: [],
-        currentPage: 1,
-        total: 0,
-        checkedData: [],
-        loading: false,
-        query: '',
-        inputNode: null,
-        originalValue: null,
-        originalObj: {},
-        showFld: this.multiple ? [] : '',
-        pageShow: true
-      }
-    },
-    model: {
-      prop: 'selectValue',
-      event: 'change'
-    },
     props: {
       placeholder: {
         default: '请选择'
@@ -90,8 +70,11 @@
       dataUrl: {
         default: ''
       },
-      dataFunName: {
-        default: ''
+      dataUrlFunc: {
+        type: Function,
+        default() {
+          return null
+        }
       },
       pageSize: {
         default: 6
@@ -116,6 +99,26 @@
           return false;
         }
       }
+    },
+    data() {
+      return {
+        val: '',
+        listData: [],
+        currentPage: 1,
+        total: 0,
+        checkedData: [],
+        loading: false,
+        query: '',
+        inputNode: null,
+        originalValue: null,
+        originalObj: {},
+        showFld: this.multiple ? [] : '',
+        pageShow: true
+      }
+    },
+    model: {
+      prop: 'selectValue',
+      event: 'change'
     },
     computed: {
       selectVal() {
@@ -195,22 +198,22 @@
       setQueryMethod(param) {
         if (this.dataUrl) {
           return post(this.dataUrl, {
-            'pageSize': this.pageSize,
-            'pageNum': this.currentPage,
+            pageSize: this.pageSize,
+            pageNum: this.currentPage,
             ...this.searchParam,
             ...param
           });
-        } else if (this.dataFunName) {
-          return this.API[this.dataFunName]({
-            'pageSize': this.pageSize,
-            'pageNum': this.currentPage,
+        } else if (this.dataUrlFunc) {
+          return this.dataUrlFunc({
+            pageSize: this.pageSize,
+            pageNum: this.currentPage,
             ...this.searchParam,
             ...param
           });
         }
       },
       getListData(param) {
-        if (!this.dataUrl && !this.dataFunName) {
+        if (!this.dataUrl && !this.dataUrlFunc) {
           return;
         }
         this.loading = true;

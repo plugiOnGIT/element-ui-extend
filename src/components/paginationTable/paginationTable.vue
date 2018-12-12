@@ -164,7 +164,6 @@
       // 查询条件改变时，重新加载表格数据
       searchParam () {
         this.currentPage = 1;
-        console.log(this.currentPage);
         this.$refs.myTable.clearSort();
         this.sortType = '';
         this.sortName = '';
@@ -259,7 +258,7 @@
         if (this.height) {
           return this.height
         } else {
-          let tableBox = document.getElementsByClassName('paginationTable-wrap');
+          let tableBox = document.getElementsByClassName('pagination-table-wrap');
           if (tableBox.length > 0) {
             let windowHeight = document.documentElement.clientHeight,
                 top = this.$refs.tableBox.getBoundingClientRect().top;
@@ -270,6 +269,7 @@
       // 设置表格高度（在tab切换或者展开、收缩查询条件时都可以调用该方法）
       setTableHeight () {
         this.tableHeight = this.initTableHeight();
+        console.log(this.tableHeight);
       }
     }
   }
